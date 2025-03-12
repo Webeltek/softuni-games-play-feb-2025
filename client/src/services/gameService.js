@@ -6,6 +6,8 @@ export default {
     async getAll(){
         const result = await request.get(baseUrl);
         const games = Object.values(result);
+        console.log(games);
+        
         return games; 
     },
     create(gameData){
