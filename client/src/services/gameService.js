@@ -3,7 +3,7 @@ import request from "../utils/request"
 const baseUrl = 'http://localhost:3030/jsonstore/games'
 
 export default {
-    async getAll(){
+    async getAll(signal){
         const result = await request.get(baseUrl);
         const games = Object.values(result);
         // console.log(games);
