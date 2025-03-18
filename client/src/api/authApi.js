@@ -8,13 +8,12 @@ export const useLogin = () =>{
 
     
     const login = async (email, password) => {
-        const result = await request.post(
+        return request.post(
             `${baseUrl}/login`, 
             {email, password}, 
             { signal: abortRef.current.signal}
         );
         
-        return result;
     }
     
     useEffect(() => {
