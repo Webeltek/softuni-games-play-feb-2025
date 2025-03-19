@@ -25,3 +25,14 @@ export const useLogin = () =>{
         login,
     }
 }
+
+export const useRegister = () => {
+    const register = (email, password) => 
+        request.post(`${baseUrl}/register`, { email, password}); // returning expression body - one line
+    
+
+    return {
+        register
+    }
+}
+
