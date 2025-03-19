@@ -4,6 +4,8 @@ import { UserContext } from "../contexts/UserContext";
 
 const baseUrl = 'http://localhost:3030/users'
 
+// must ask the question is this hook on event or on mount
+
 export const useLogin = () =>{
     const abortRef = useRef(new AbortController());
 
