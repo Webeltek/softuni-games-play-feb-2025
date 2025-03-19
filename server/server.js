@@ -1649,7 +1649,20 @@
     			_createdOn: 1616237272948,
     			_updatedOn: 1616237293676
     		}
-    	}
+    	},
+        games: [
+            {
+                "title": "MK3 Ultimate",
+                "category": "Fighting",
+                "maxLevel": "50",
+                "imageUrl": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f9/Ultimate_MK3.png/220px-Ultimate_MK3.png",
+                "summary": "Ultimate Mortal Kombat 3 was released to arcades in 1995. It is an update of Mortal Kombat 3, featuring altered gameplay, additional characters, and new arenas. Various home versions of the game were released soon afterward, although none of these were completely identical to the arcade version.",
+                "_id": "8ba38885-f33a-413d-b767-c2932887da58",
+                "_createdOn": 1742415661442,
+                "_updatedOn": 1742423222999,
+                "_ownerId": "a1b44652-5ec7-4690-b73e-452a428b9b30"
+            }
+        ]
     };
     var rules$1 = {
     	users: {
