@@ -59,7 +59,7 @@ export const useLogout = () => {
     
 
     return {
-        isLoggedOut: !!accessToken
+        isLoggedOut: !!accessToken  // TODO is better to return the actual isLoggetOut state from context instead of derived value !!accessToken because !!accessToken is not updated to latest value 
     }
 
 }
