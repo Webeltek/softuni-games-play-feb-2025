@@ -18,6 +18,7 @@ const request = async (method, url, data, options = {} ) => {
     
     const response = await fetch(url, options);
     const responseContentType = response.headers.get('content-type');
+    // prevent missing response content when deleting which will throw error if response.json() is called
     if(!responseContentType ){
         return;
     }
@@ -32,5 +33,6 @@ export default {
     // get: (...params) => request('GET', ...params)
     post: request.bind(null, 'POST'),
     put: request.bind(null, 'PUT'),
-    delete: request.bind(null, 'DELETE')
+    delete: request.bind(null, 'DELETE'),
+    baseRequest: request
 }
