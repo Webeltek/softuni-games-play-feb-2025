@@ -21,10 +21,9 @@ export const useComments = (gameId) => {
         
         request.get(`${baseUrl}?${searchParams.toString()}`)
         .then(result => {
-            console.log(result);
             
             setComments(result)})
-    },[request, gameId])
+    },[gameId]) // TODO Fix this
 
     return {
         comments,
