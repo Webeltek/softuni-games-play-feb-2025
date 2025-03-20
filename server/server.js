@@ -1650,19 +1650,49 @@
     			_updatedOn: 1616237293676
     		}
     	},
-        games: [
-            {
+        games: {
+            "60f0cf0b-34b0-4abd-9769-8c42f830df56": {
                 "title": "MK3 Ultimate",
                 "category": "Fighting",
                 "maxLevel": "50",
                 "imageUrl": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f9/Ultimate_MK3.png/220px-Ultimate_MK3.png",
                 "summary": "Ultimate Mortal Kombat 3 was released to arcades in 1995. It is an update of Mortal Kombat 3, featuring altered gameplay, additional characters, and new arenas. Various home versions of the game were released soon afterward, although none of these were completely identical to the arcade version.",
-                "_id": "8ba38885-f33a-413d-b767-c2932887da58",
+                "_id": "60f0cf0b-34b0-4abd-9769-8c42f830df56",
                 "_createdOn": 1742415661442,
                 "_updatedOn": 1742423222999,
                 "_ownerId": "a1b44652-5ec7-4690-b73e-452a428b9b30"
+            },
+            "aff1a873-dfc4-4a74-bc1d-62614f805ba4" : {
+                "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
+                "title": "Counter Strike 1.6",
+                "category": "FPS",
+                "maxLevel": "100",
+                "imageUrl": "https://upload.wikimedia.org/wikipedia/en/6/67/Counter-Strike_Box.jpg",
+                "summary": "Play the world's number 1 online action game. Engage in an incredibly realistic brand of terrorist warfare in this wildly popular team-based game.",
+                "_createdOn": 1742466263839,
+                "_id": "aff1a873-dfc4-4a74-bc1d-62614f805ba4"
+            },
+            "765f7432-a256-4ff3-9d56-2e94d58a577c": {
+                "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
+                "title": "Pong",
+                "category": "arcarde",
+                "maxLevel": "15",
+                "imageUrl": "https://cdn.mos.cms.futurecdn.net/9osRHSHiPVZnhZBtN4xWvJ.jpg",
+                "summary": "Pong is one of the first computer games that ever created, this simple 'tennis like' game",
+                "_createdOn": 1742466313261,
+                "_id": "765f7432-a256-4ff3-9d56-2e94d58a577c"
+            },
+            "52dbb613-8bcf-4b3a-871f-7fa657ab7cd0": {
+                "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
+                "title": "Deep Rock Galactic",
+                "category": "Co-op FPS PVE",
+                "maxLevel": "30",
+                "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202010/1407/2JSde8PFCF6B4nO2EECrcR1m.png",
+                "summary": "I'm wondering if fighting bugs and moving dirt is the best way to make a living. For Rock and Stone.",
+                "_createdOn": 1742466360051,
+                "_id": "52dbb613-8bcf-4b3a-871f-7fa657ab7cd0"
             }
-        ]
+        }
     };
     var rules$1 = {
     	users: {

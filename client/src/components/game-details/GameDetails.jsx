@@ -12,7 +12,10 @@ export default function GameDetails() {
     const [ comments, setComments] = useState([]);
     const { gameId } = useParams();
     const { game } = useGame(gameId);
-    const { deleteGame} = useDeleteGame()
+    const { deleteGame} = useDeleteGame();
+
+    console.log(game);
+    
 
     useEffect(() => {
 

@@ -4,33 +4,6 @@ import useAuth from "../hooks/useAuth";
 
 const baseUrl = 'http://localhost:3030/data/games'
 
-
-export const useGames = ()=> {
-    const [games, setGames] = useState([]);
-    useEffect(()=>{
-        request.get(`${baseUrl}`)
-        .then(setGames);
-
-    },[])
-
-    return {
-        games,
-    }
-}
-
-export const useGame = (gameId) => {
-    const [game, setGame ] = useState({});
-
-    useEffect(()=> {
-        request.get(`${baseUrl}/${gameId}`)
-        .then(setGame)
-    },[gameId]);
-
-    return {
-        game,
-    }
-}
-
 export const useCreateGame = ()=> {
     const { request } = useAuth();
     
@@ -66,5 +39,51 @@ export const useDeleteGame = ()=> {
     return {
         deleteGame
     }
+}
+
+export const useGames = ()=> {
+    const [games, setGames] = useState([]);
+    useEffect(()=>{
+        request.get(`${baseUrl}`)
+        .then(setGames);
+
+    },[])
+
+    return {
+        games,
+    }
+}
+
+export const useGame = (gameId) => {
+    const [game, setGame ] = useState({});
+
+    useEffect(()=> {
+        request.get(`${baseUrl}/${gameId}`)
+        .then(setGame)
+    },[gameId]);
+
+    return {
+        game,
+    }
+}
+
+
+
+export const useLatestGames = () => {
+    const PAGE_SIZE = 3;
+    const [latestGames, setLatestGames] = useState([]);
+
+    useEffect(()=>{
+        const searchParams = new URLSearchParams({
+            sortBy: '_createdOn desc',
+            pageSize: PAGE_SIZE
+        });
+
+        request.get(`${baseUrl}?${searchParams.toString()}`)
+        .then(setLatestGames);
+
+    },[])
+
+    return { latestGames }
 }
 
