@@ -11,11 +11,12 @@ export const useLogin = () =>{
 
     
     const login = async (email, password) => {
-        return request.post(
+        const result =  request.post(
             `${baseUrl}/login`, 
             {email, password}, 
             { signal: abortRef.current.signal}
         );
+        return result;
         
     }
     
