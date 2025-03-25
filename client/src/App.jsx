@@ -1,11 +1,10 @@
 import { Routes, Route} from 'react-router'
 import { useState } from 'react'
 
-import { UserContext } from './contexts/UserContext';
+import UserProvider from './providers/UserProvider';
 
 import Header from './components/header/Header'
 import Home from './components/home/Home'
-import './App.css'
 import Login from './components/login/Login'
 import Register from './components/register/Register'
 import GameCatalog from './components/game-catalog/GameCatalog'
@@ -13,22 +12,15 @@ import GameCreate from './components/game-create/GameCreate'
 import GameDetails from './components/game-details/GameDetails'
 import GameEdit from './components/game-edit/GameEdit'
 import Logout from './components/logout/Logout';
-import usePersistedState from './hooks/usePersitedState';
+import AuthGuard from './components/guards/AuthGuard';
+import './App.css'
 
 
 function App() {
-  const [authData, setAuthData] = usePersistedState('auth', {});
-
-  const userLoginHandler = (resultData) => {
-    setAuthData(resultData);
-  }
-
-  const userLogoutHandler = () =>{
-    setAuthData({})
-  }
+  
 
   return (
-    <UserContext.Provider value={ {...authData, userLoginHandler, userLogoutHandler} }>
+    <UserProvider>
       <div id="box">
 
         <Header />
@@ -41,11 +33,10 @@ function App() {
             <Route path="/games/:gameId/edit" element={ <GameEdit />} />
             <Route path="/login" element={ <Login />} />
             <Route path="/register" element={ <Register />} />
-            <Route path="/logout" element={ <Logout /> }  />
           </Routes>
         </main>
       </div>
-    </UserContext.Provider>
+    </UserProvider>
   )
 }
 
