@@ -14,7 +14,10 @@ export default function Login() {
         const authData = await login(values.email, values.password);
 
         userLoginHandler(authData);
-        navigate('/games');
+        // navigate('/games');
+
+        // navigate to last page before login
+        navigate(-1);
 
         return values;
     }
