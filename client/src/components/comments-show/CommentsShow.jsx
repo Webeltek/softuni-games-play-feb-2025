@@ -1,6 +1,6 @@
 import styles from './CommentsShow.module.css'
 
-export default function CommentsShow({
+export default function CommentsView({
     comments
 }) {
     
@@ -10,9 +10,9 @@ export default function CommentsShow({
             <ul>
                 {/* <!-- list all comments for current game (If any) --> */}
                 {comments.length > 0
-                ? comments.map( ({_id, _ownerId, comment, pending}) => (
+                ? comments.map( ({_id, _ownerId, comment, pending, author}) => (
                     <li key={_id} className={`comment ${pending ? styles['comments-pending'] : ''}`.trim()}>
-                        <p>{_ownerId}: {comment}</p>
+                        <p>{author.email}: {comment}</p>
                     </li>
                 ) ) 
                 : <p className="no-comment">No comments.</p>

@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router";
-import CommentsShow from "../comments-show/CommentsShow";
+import CommentsView from "../comments-show/CommentsShow";
 import CommentsCreate from "../comments-create/CommentsCreate";
 import { useDeleteGame, useGame } from "../../api/gameApi";
 import useAuth from "../../hooks/useAuth";
@@ -19,7 +19,7 @@ export default function GameDetails() {
         (state, newOptimComment)=> [...state, newOptimComment]
     );
     
-    console.log(optimisticComments);
+    console.log(comments);
 
 
     const gameDeleteClickHandler = async () =>{
@@ -40,7 +40,10 @@ export default function GameDetails() {
             _ownerId: userId,
             gameId,
             comment,
-            pending: true, 
+            pending: true,
+            author: {
+               email, 
+            }
         }
 
         setOptimisticComments( newOptimisticComment )
@@ -49,7 +52,7 @@ export default function GameDetails() {
         const commentResult = await create(gameId,comment)
 
         // Local state update
-        addComment(commentResult)
+        addComment({ ...commentResult, author: { email} })
     }
 
     const isOwner = userId === game._ownerId;
@@ -68,7 +71,7 @@ export default function GameDetails() {
 
                 <p className="text">{game.summary}</p>
 
-                <CommentsShow comments={optimisticComments}/>
+                <CommentsView comments={optimisticComments}/>
 
                 {/* <!-- Edit/Delete buttons ( Only for creator of this game )  --> */}
                 { isOwner && (
