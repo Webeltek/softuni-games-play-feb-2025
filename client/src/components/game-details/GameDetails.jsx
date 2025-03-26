@@ -4,6 +4,8 @@ import CommentsCreate from "../comments-create/CommentsCreate";
 import { useDeleteGame, useGame } from "../../api/gameApi";
 import useAuth from "../../hooks/useAuth";
 import { useComments, useCreateComment } from "../../api/commentApi";
+import { useOptimistic } from "react";
+import {v4 as uuid} from 'uuid'
 
 export default function GameDetails() {
     const navigate = useNavigate();
@@ -11,9 +13,14 @@ export default function GameDetails() {
     const { gameId } = useParams();
     const { game } = useGame(gameId);
     const { deleteGame} = useDeleteGame();
-    const { comments, setComments} = useComments(gameId);
     const { create} = useCreateComment();
+    const { comments, addComment} = useComments(gameId);
+    const [optimisticComments, setOptimisticComments] = useOptimistic(comments,
+        (state, newOptimComment)=> [...state, newOptimComment]
+    );
     
+    console.log(optimisticComments);
+
 
     const gameDeleteClickHandler = async () =>{
         const hasConfirm =  confirm(`Are you sure you want to delete ${game.title} game`);
@@ -27,8 +34,22 @@ export default function GameDetails() {
     }
 
     const commentCreateHandler = async (comment) =>{
-        const newComment = await create(gameId,comment)
-        setComments( state => [...state, newComment])
+        // optimistic update
+        const newOptimisticComment = {
+            _id: uuid(),
+            _ownerId: userId,
+            gameId,
+            comment,
+            pending: true, 
+        }
+
+        setOptimisticComments( newOptimisticComment )
+
+        //server update
+        const commentResult = await create(gameId,comment)
+
+        // Local state update
+        addComment(commentResult)
     }
 
     const isOwner = userId === game._ownerId;
@@ -47,7 +68,7 @@ export default function GameDetails() {
 
                 <p className="text">{game.summary}</p>
 
-                <CommentsShow comments={comments}/>
+                <CommentsShow comments={optimisticComments}/>
 
                 {/* <!-- Edit/Delete buttons ( Only for creator of this game )  --> */}
                 { isOwner && (

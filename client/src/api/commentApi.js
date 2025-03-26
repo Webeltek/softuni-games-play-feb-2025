@@ -1,33 +1,47 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import useAuth from "../hooks/useAuth";
+import request from '../utils/request'
 
 const baseUrl = 'http://localhost:3030/data/comments';
 
-export default {
-    // create(email, gameId, comment){
-    //     return request.post(baseUrl, {email, gameId, comment} ) // Important not to miss return because the Promise must be returned and awaited inside the caller
-    // }
+function commentsReducer(state, action){
+    switch (action.type) {
+        case 'ADD_COMMENT':
+            return [...state, action.payload]
+        case 'GET_ALL':
+            return action.payload;
+        default:
+            return state;
+    }
 }
 
+
 export const useComments = (gameId) => {
-    const { request} = useAuth();
-    const [comments , setComments] = useState([]);
+    const { accessToken} = useAuth();
+    // const [comments , setComments] = useState([]);
+    const [comments, dispatch] = useReducer(commentsReducer, []);
 
     useEffect(() => {
         const searchParams = new URLSearchParams({
             where: `gameId="${gameId}"`
         })
 
-        
-        request.get(`${baseUrl}?${searchParams.toString()}`)
+        const options = {
+            headers: {
+                'X-Authorization': accessToken
+            }
+        }
+
+        request.get(`${baseUrl}?${searchParams.toString()}`, null, options)
         .then(result => {
-            
-            setComments(result)})
-    },[gameId]) // TODO Fix this
+            dispatch( { type: 'GET_ALL', payload: result});
+        })
+    },[gameId, accessToken]) // TODO Fix this
 
     return {
         comments,
-        setComments
+        addComment: (data) => dispatch({ type: 'ADD_COMMENT', payload: data})
+        
     }
 }
 
@@ -42,5 +56,7 @@ export const useCreateComment = () =>{
         return request.post(`${baseUrl}`, commentData);
     }
 
-    return { create}
+    return { 
+        create,
+    }
 }
