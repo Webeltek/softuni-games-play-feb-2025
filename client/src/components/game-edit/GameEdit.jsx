@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router";
 import { useEditGame, useGame } from "../../api/gameApi";
 import useAuth from "../../hooks/useAuth";
@@ -20,6 +19,8 @@ export default function GameEdit() {
     }
 
     const isOwner = userId === game._ownerId;
+    console.log({isOwner});
+    
 
     if(!isOwner){
         return <Navigate to="/games" />
