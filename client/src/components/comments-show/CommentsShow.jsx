@@ -11,7 +11,13 @@ export default function CommentsView({
                 {/* <!-- list all comments for current game (If any) --> */}
                 {comments.length > 0
                 ? comments.map( ({_id, _ownerId, comment, pending, author}) => (
-                    <li key={_id} className={`comment ${pending ? styles['comments-pending'] : ''}`.trim()}>
+                    <li key={_id} 
+                    className="comment"
+                    style={
+                        {
+                           backgroundColor:  pending ? 'lightgray' : ''
+                        }}
+                    >
                         <p>{author.email}: {comment}</p>
                     </li>
                 ) ) 
