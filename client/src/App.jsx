@@ -1,5 +1,5 @@
 import { Routes, Route} from 'react-router'
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 
 import UserProvider from './providers/UserProvider';
 
@@ -15,6 +15,9 @@ import Logout from './components/logout/Logout';
 import AuthGuard from './components/guards/AuthGuard';
 import './App.css'
 import GuestGuard from './components/guards/GuestGuard';
+// import Admin from './components/admin/Admin';
+
+const Admin = lazy(()=> import('./components/admin/Admin'));
 
 
 function App() {
@@ -39,6 +42,11 @@ function App() {
               <Route path="/login" element={ <Login />} />
               <Route path="/register" element={ <Register />} />
             </Route>
+            <Route path="/admin" element={ (
+              <Suspense> fallback={<p>Loading...</p>}
+                <Admin />
+              </Suspense>
+            ) } />
           </Routes>
         </main>
       </div>
