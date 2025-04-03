@@ -1,4 +1,3 @@
-import styles from './CommentsShow.module.css'
 
 export default function CommentsView({
     comments

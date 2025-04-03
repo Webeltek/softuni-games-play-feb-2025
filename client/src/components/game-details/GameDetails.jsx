@@ -48,7 +48,7 @@ export default function GameDetails() {
         }
         
         // optimistic update
-        setOptimisticComments( (optimisticState)=> [...optimisticState, newOptimisticComment] )
+        setOptimisticComments(newOptimisticComment)
 
         //server update
         const commentResult = await create(gameId,comment)

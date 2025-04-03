@@ -17,7 +17,7 @@ function commentsReducer(state, action){
 
 
 export const useComments = (gameId) => {
-    const { accessToken} = useAuth();
+    const { request} = useAuth();
     // const [comments , setComments] = useState([]);
     const [comments, dispatch] = useReducer(commentsReducer, []);
 
@@ -27,17 +27,11 @@ export const useComments = (gameId) => {
             load: 'author=_ownerId:users',
         })
 
-        const options = {
-            headers: {
-                'X-Authorization': accessToken
-            }
-        }
-
-        request.get(`${baseUrl}?${searchParams.toString()}`, null, options)
+        request.get(`${baseUrl}?${searchParams.toString()}`, null)
         .then(result => {
             dispatch( { type: 'GET_ALL', payload: result});
         })
-    },[gameId, accessToken]) // TODO Fix this
+    },[gameId, request]) // TODO Fix this
 
     return {
         comments,
